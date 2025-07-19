@@ -3,7 +3,7 @@ import axios from "axios";
 export default function ClaimHistory() {
     const [claims, setClaims] = useState([]);
     const [usersMap, setUsersMap] = useState({});
-
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -20,11 +20,23 @@ export default function ClaimHistory() {
                 console.log(map)
             } catch (err) {
                 console.error(err);
+            } finally {
+                setLoading(false); // Hide loader after fetch (success or error)
             }
         };
         fetchData();
     }, []);
-
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-40 gap-10">
+                
+                <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-16 w-16"></div>
+                <div>
+                    <p>Please wait!.. History is coming...</p>
+                </div>
+            </div>
+        );
+    }
     return (
         <div>
             <h2 className="text-3xl font-bold my-12">Claim History</h2>
