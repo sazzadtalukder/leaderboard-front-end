@@ -12,13 +12,13 @@ export default function ClaimPoints() {
 
     const handleClaim = async () => {
         if (!selectedUserId) return;
-        const res = await axios.post('https://leaderboard-backend-seven.vercel.app/claims', { userId: selectedUserId });
+        const res = await axios.post('https://leaderboard-backend-l7wr.onrender.com/claims', { userId: selectedUserId });
         // setMessage(`Awarded ${res?.data?.points} points to ${res?.data?.user}`);
         refetch();  
     };
     const handleAddUser = async () => {
         if (!newUserName) return;
-        await axios.post('https://leaderboard-backend-seven.vercel.app/users', { name: newUserName });
+        await axios.post('https://leaderboard-backend-l7wr.onrender.com/users', { name: newUserName });
         setNewUserName('');
         refetch();
     };

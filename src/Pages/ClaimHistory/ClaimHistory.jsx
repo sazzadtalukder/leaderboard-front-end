@@ -8,8 +8,8 @@ export default function ClaimHistory() {
         const fetchData = async () => {
             try {
                 const [claimsRes, usersRes] = await Promise.all([
-                    axios.get("https://leaderboard-backend-seven.vercel.app/claims"),
-                    axios.get("https://leaderboard-backend-seven.vercel.app/users")
+                    axios.get("https://leaderboard-backend-l7wr.onrender.com/claims"),
+                    axios.get("https://leaderboard-backend-l7wr.onrender.com/users")
                 ]);
                 setClaims(claimsRes.data);
                 const map = {};
@@ -26,6 +26,7 @@ export default function ClaimHistory() {
         };
         fetchData();
     }, []);
+    console.log(claims)
     if (loading) {
         return (
             <div className="flex justify-center items-center h-40 gap-10">
@@ -42,8 +43,10 @@ export default function ClaimHistory() {
             <h2 className="text-3xl font-bold my-12">Claim History</h2>
             <ul className="space-y-1">
                 { claims && claims?.map(claim => (
-                    <li key={claim._id} className="border p-2 rounded">
-                        {usersMap[claim.userId] || "Unknown User"} claimed {claim?.points} points on {new Date(claim?.claimedAt).toLocaleString()}
+                    <li key={claim?._id} className="border p-2 rounded">
+                        {usersMap[claim?.userId] || "Unknown User"} claimed {claim?.points} points on {new Date(claim?.claimedAt).toLocaleString()}
+                        {/* {usersMap[claim?.userId?.toString?.() || claim?.userId] || "Unknown User"} */}
+
                     </li>
                 ))}
             </ul>
